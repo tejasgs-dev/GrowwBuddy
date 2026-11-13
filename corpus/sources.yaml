@@ -1,0 +1,37 @@
+# GrowwBuddy corpus manifest: the ONLY sources that may be fetched, indexed or cited.
+# This list is fixed by docs/implementation-plan.md (Phase 1). The loader rejects any
+# added, removed or changed entry. Change the plan before changing this file.
+
+allowed_domains:
+  - groww.in
+
+sources:
+  - id: groww-hdfc-mid-cap
+    scheme: hdfc-mid-cap
+    url: https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth
+    format: html
+    doc_type: scheme_page
+
+  - id: groww-hdfc-small-cap
+    scheme: hdfc-small-cap
+    url: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+    format: html
+    doc_type: scheme_page
+
+  - id: groww-hdfc-large-cap
+    scheme: hdfc-large-cap
+    url: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+    format: html
+    doc_type: scheme_page
+
+  - id: groww-hdfc-silver-etf-fof
+    scheme: hdfc-silver-etf-fof
+    url: https://groww.in/mutual-funds/hdfc-silver-etf-fof-direct-growth
+    format: html
+    doc_type: scheme_page
+
+  - id: groww-hdfc-multi-cap
+    scheme: hdfc-multi-cap
+    url: https://groww.in/mutual-funds/hdfc-multi-cap-fund-direct-growth
+    format: html
+    doc_type: scheme_page

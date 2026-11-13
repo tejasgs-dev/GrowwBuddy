@@ -1,0 +1,180 @@
+{"query": "What is the expense ratio of HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "plain"}
+{"query": "How much does HDFC Small Cap Fund charge every year?", "scheme": "hdfc-small-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "plain"}
+{"query": "expense ratio of the large cap fund direct plan", "scheme": "hdfc-large-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "plain"}
+{"query": "What are the annual costs of the HDFC Silver ETF FoF?", "scheme": "hdfc-silver-etf-fof", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "plain"}
+{"query": "How much will HDFC Multi Cap deduct as fees each year?", "scheme": "hdfc-multi-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "plain"}
+{"query": "expence ratio midcap", "scheme": "hdfc-mid-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "typo"}
+{"query": "wat is the expnse ratio of hdfc smallcap", "scheme": "hdfc-small-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "typo"}
+{"query": "large cap fund expens ratio", "scheme": "hdfc-large-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "typo"}
+{"query": "silver fof expence ratoi", "scheme": "hdfc-silver-etf-fof", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "typo"}
+{"query": "multicap expnse ratio pls", "scheme": "hdfc-multi-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "typo"}
+{"query": "TER mid cap", "scheme": "hdfc-mid-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "abbrev"}
+{"query": "small cap TER?", "scheme": "hdfc-small-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "abbrev"}
+{"query": "TER of HDFC large cap direct", "scheme": "hdfc-large-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "abbrev"}
+{"query": "silver FoF TER", "scheme": "hdfc-silver-etf-fof", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "abbrev"}
+{"query": "multi cap TER %", "scheme": "hdfc-multi-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "abbrev"}
+{"query": "mid cap ka expense ratio kitna hai?", "scheme": "hdfc-mid-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "hinglish"}
+{"query": "small cap fund mein charges kitne lagte hain", "scheme": "hdfc-small-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "hinglish"}
+{"query": "large cap ka TER batao", "scheme": "hdfc-large-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "hinglish"}
+{"query": "silver fof ka saalana kharcha kitna hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "hinglish"}
+{"query": "multi cap fund ki fees kitni hai yearly", "scheme": "hdfc-multi-cap", "expected_section": "expense_ratio", "type": "expense_ratio", "wording": "hinglish"}
+{"query": "What is the exit load for HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "plain"}
+{"query": "Is there a charge if I sell HDFC Small Cap units early?", "scheme": "hdfc-small-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "plain"}
+{"query": "What happens if I redeem the large cap fund within a year?", "scheme": "hdfc-large-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "plain"}
+{"query": "How much is deducted if I withdraw from the silver FoF in a week?", "scheme": "hdfc-silver-etf-fof", "expected_section": "exit_load", "type": "exit_load", "wording": "plain"}
+{"query": "exit load of HDFC Multi Cap Fund", "scheme": "hdfc-multi-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "plain"}
+{"query": "exit lod mid cap", "scheme": "hdfc-mid-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "typo"}
+{"query": "smallcap exitload", "scheme": "hdfc-small-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "typo"}
+{"query": "large cap exit laod", "scheme": "hdfc-large-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "typo"}
+{"query": "silver fof exit lode", "scheme": "hdfc-silver-etf-fof", "expected_section": "exit_load", "type": "exit_load", "wording": "typo"}
+{"query": "multicap exit loda charges", "scheme": "hdfc-multi-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "typo"}
+{"query": "EL on mid cap?", "scheme": "hdfc-mid-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "abbrev"}
+{"query": "small cap EL", "scheme": "hdfc-small-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "abbrev"}
+{"query": "large cap exit load %", "scheme": "hdfc-large-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "abbrev"}
+{"query": "silver FoF EL days", "scheme": "hdfc-silver-etf-fof", "expected_section": "exit_load", "type": "exit_load", "wording": "abbrev"}
+{"query": "EL multi cap", "scheme": "hdfc-multi-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "abbrev"}
+{"query": "mid cap se jaldi paisa nikalne par kitna katega?", "scheme": "hdfc-mid-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "hinglish"}
+{"query": "small cap ka exit load kya hai", "scheme": "hdfc-small-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "hinglish"}
+{"query": "large cap 1 saal se pehle bechne par charge lagega kya", "scheme": "hdfc-large-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "hinglish"}
+{"query": "silver fof se paise nikale toh kitna kategi", "scheme": "hdfc-silver-etf-fof", "expected_section": "exit_load", "type": "exit_load", "wording": "hinglish"}
+{"query": "multi cap ka exit load batao", "scheme": "hdfc-multi-cap", "expected_section": "exit_load", "type": "exit_load", "wording": "hinglish"}
+{"query": "What is the minimum SIP for HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "plain"}
+{"query": "How little can I invest in HDFC Small Cap Fund?", "scheme": "hdfc-small-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "plain"}
+{"query": "What is the smallest amount to start the large cap fund?", "scheme": "hdfc-large-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "plain"}
+{"query": "minimum one-time investment in HDFC Silver ETF FoF", "scheme": "hdfc-silver-etf-fof", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "plain"}
+{"query": "Can I start HDFC Multi Cap with a small monthly amount?", "scheme": "hdfc-multi-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "plain"}
+{"query": "minimun sip mid cap", "scheme": "hdfc-mid-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "typo"}
+{"query": "smallcap minimum investmnt", "scheme": "hdfc-small-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "typo"}
+{"query": "large cap min amout to start", "scheme": "hdfc-large-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "typo"}
+{"query": "silver fof minimum lumpsun", "scheme": "hdfc-silver-etf-fof", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "typo"}
+{"query": "multicap minimm sip", "scheme": "hdfc-multi-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "typo"}
+{"query": "min SIP mid cap", "scheme": "hdfc-mid-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "abbrev"}
+{"query": "small cap min inv", "scheme": "hdfc-small-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "abbrev"}
+{"query": "large cap min SIP amt", "scheme": "hdfc-large-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "abbrev"}
+{"query": "silver FoF min lumpsum", "scheme": "hdfc-silver-etf-fof", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "abbrev"}
+{"query": "multi cap min SIP?", "scheme": "hdfc-multi-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "abbrev"}
+{"query": "mid cap mein kam se kam kitna SIP kar sakte hain", "scheme": "hdfc-mid-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "hinglish"}
+{"query": "small cap mein shuru karne ke liye kitne paise chahiye", "scheme": "hdfc-small-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "hinglish"}
+{"query": "large cap ka minimum SIP kitna hai", "scheme": "hdfc-large-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "hinglish"}
+{"query": "silver fof mein ek baar mein kam se kam kitna dalna padega", "scheme": "hdfc-silver-etf-fof", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "hinglish"}
+{"query": "multi cap ka minimum amount kya hai", "scheme": "hdfc-multi-cap", "expected_section": "minimum_investment", "type": "minimum_investment", "wording": "hinglish"}
+{"query": "What is the riskometer of HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "plain"}
+{"query": "How risky is HDFC Small Cap Fund?", "scheme": "hdfc-small-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "plain"}
+{"query": "What risk level is the large cap fund?", "scheme": "hdfc-large-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "plain"}
+{"query": "Is the HDFC silver FoF a high risk fund?", "scheme": "hdfc-silver-etf-fof", "expected_section": "riskometer", "type": "riskometer", "wording": "plain"}
+{"query": "risk category of HDFC Multi Cap Fund", "scheme": "hdfc-multi-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "plain"}
+{"query": "riskometre mid cap", "scheme": "hdfc-mid-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "typo"}
+{"query": "smallcap risko meter", "scheme": "hdfc-small-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "typo"}
+{"query": "large cap risk levl", "scheme": "hdfc-large-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "typo"}
+{"query": "silver fof riskomter", "scheme": "hdfc-silver-etf-fof", "expected_section": "riskometer", "type": "riskometer", "wording": "typo"}
+{"query": "multicap how riksy", "scheme": "hdfc-multi-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "typo"}
+{"query": "mid cap risk?", "scheme": "hdfc-mid-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "abbrev"}
+{"query": "small cap risk lvl", "scheme": "hdfc-small-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "abbrev"}
+{"query": "large cap risk grade", "scheme": "hdfc-large-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "abbrev"}
+{"query": "silver FoF risk", "scheme": "hdfc-silver-etf-fof", "expected_section": "riskometer", "type": "riskometer", "wording": "abbrev"}
+{"query": "multi cap risk rating", "scheme": "hdfc-multi-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "abbrev"}
+{"query": "mid cap mein risk kitna hai", "scheme": "hdfc-mid-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "hinglish"}
+{"query": "small cap kitna risky hai", "scheme": "hdfc-small-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "hinglish"}
+{"query": "large cap ka riskometer kya bolta hai", "scheme": "hdfc-large-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "hinglish"}
+{"query": "silver fof mein kitna khatra hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "riskometer", "type": "riskometer", "wording": "hinglish"}
+{"query": "multi cap ka risk level batao", "scheme": "hdfc-multi-cap", "expected_section": "riskometer", "type": "riskometer", "wording": "hinglish"}
+{"query": "What is the benchmark of HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "plain"}
+{"query": "Which index is HDFC Small Cap Fund measured against?", "scheme": "hdfc-small-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "plain"}
+{"query": "What index does the large cap fund follow?", "scheme": "hdfc-large-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "plain"}
+{"query": "What does the HDFC Silver ETF FoF track?", "scheme": "hdfc-silver-etf-fof", "expected_section": "benchmark", "type": "benchmark", "wording": "plain"}
+{"query": "benchmark index for HDFC Multi Cap Fund", "scheme": "hdfc-multi-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "plain"}
+{"query": "mid cap benchmrk", "scheme": "hdfc-mid-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "typo"}
+{"query": "smallcap bench mark index", "scheme": "hdfc-small-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "typo"}
+{"query": "large cap benchmak", "scheme": "hdfc-large-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "typo"}
+{"query": "silver fof benchmarck", "scheme": "hdfc-silver-etf-fof", "expected_section": "benchmark", "type": "benchmark", "wording": "typo"}
+{"query": "multicap benchamrk", "scheme": "hdfc-multi-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "typo"}
+{"query": "mid cap TRI", "scheme": "hdfc-mid-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "abbrev"}
+{"query": "small cap bm index", "scheme": "hdfc-small-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "abbrev"}
+{"query": "large cap benchmark TRI?", "scheme": "hdfc-large-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "abbrev"}
+{"query": "silver FoF bm", "scheme": "hdfc-silver-etf-fof", "expected_section": "benchmark", "type": "benchmark", "wording": "abbrev"}
+{"query": "multi cap index TRI", "scheme": "hdfc-multi-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "abbrev"}
+{"query": "mid cap ka benchmark kya hai", "scheme": "hdfc-mid-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "hinglish"}
+{"query": "small cap kis index se compare hota hai", "scheme": "hdfc-small-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "hinglish"}
+{"query": "large cap ka index kaunsa hai", "scheme": "hdfc-large-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "hinglish"}
+{"query": "silver fof kisko track karta hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "benchmark", "type": "benchmark", "wording": "hinglish"}
+{"query": "multi cap ka benchmark batao", "scheme": "hdfc-multi-cap", "expected_section": "benchmark", "type": "benchmark", "wording": "hinglish"}
+{"query": "Who manages HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "plain"}
+{"query": "Who is the fund manager of HDFC Small Cap Fund?", "scheme": "hdfc-small-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "plain"}
+{"query": "Who runs the large cap fund?", "scheme": "hdfc-large-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "plain"}
+{"query": "Which people look after the HDFC silver FoF?", "scheme": "hdfc-silver-etf-fof", "expected_section": "fund_manager", "type": "fund_manager", "wording": "plain"}
+{"query": "Name the managers of HDFC Multi Cap Fund", "scheme": "hdfc-multi-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "plain"}
+{"query": "mid cap fund manger", "scheme": "hdfc-mid-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "typo"}
+{"query": "smallcap fund maneger", "scheme": "hdfc-small-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "typo"}
+{"query": "large cap who manges", "scheme": "hdfc-large-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "typo"}
+{"query": "silver fof fund mangers", "scheme": "hdfc-silver-etf-fof", "expected_section": "fund_manager", "type": "fund_manager", "wording": "typo"}
+{"query": "multicap manager naam", "scheme": "hdfc-multi-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "typo"}
+{"query": "mid cap FM", "scheme": "hdfc-mid-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "abbrev"}
+{"query": "small cap FM name", "scheme": "hdfc-small-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "abbrev"}
+{"query": "large cap mgr", "scheme": "hdfc-large-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "abbrev"}
+{"query": "silver FoF FMs", "scheme": "hdfc-silver-etf-fof", "expected_section": "fund_manager", "type": "fund_manager", "wording": "abbrev"}
+{"query": "multi cap fund mgr", "scheme": "hdfc-multi-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "abbrev"}
+{"query": "mid cap fund ko kaun manage karta hai", "scheme": "hdfc-mid-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "hinglish"}
+{"query": "small cap ka fund manager kaun hai", "scheme": "hdfc-small-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "hinglish"}
+{"query": "large cap ko kaun chalata hai", "scheme": "hdfc-large-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "hinglish"}
+{"query": "silver fof ka manager kaun hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "fund_manager", "type": "fund_manager", "wording": "hinglish"}
+{"query": "multi cap fund kiske haath mein hai", "scheme": "hdfc-multi-cap", "expected_section": "fund_manager", "type": "fund_manager", "wording": "hinglish"}
+{"query": "What is the investment objective of HDFC Mid Cap Fund?", "scheme": "hdfc-mid-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "plain"}
+{"query": "What does HDFC Small Cap Fund invest in?", "scheme": "hdfc-small-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "plain"}
+{"query": "What is the large cap fund trying to achieve?", "scheme": "hdfc-large-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "plain"}
+{"query": "What does the HDFC Silver ETF FoF put money into?", "scheme": "hdfc-silver-etf-fof", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "plain"}
+{"query": "What is the goal of HDFC Multi Cap Fund?", "scheme": "hdfc-multi-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "plain"}
+{"query": "mid cap objectve", "scheme": "hdfc-mid-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "typo"}
+{"query": "smallcap investmnt objective", "scheme": "hdfc-small-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "typo"}
+{"query": "large cap fund aim wat", "scheme": "hdfc-large-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "typo"}
+{"query": "silver fof objctive", "scheme": "hdfc-silver-etf-fof", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "typo"}
+{"query": "multicap what does it invst in", "scheme": "hdfc-multi-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "typo"}
+{"query": "mid cap obj?", "scheme": "hdfc-mid-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "abbrev"}
+{"query": "small cap inv objective", "scheme": "hdfc-small-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "abbrev"}
+{"query": "large cap obj", "scheme": "hdfc-large-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "abbrev"}
+{"query": "silver FoF obj", "scheme": "hdfc-silver-etf-fof", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "abbrev"}
+{"query": "multi cap obj & strategy", "scheme": "hdfc-multi-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "abbrev"}
+{"query": "mid cap fund kis cheez mein paisa lagata hai", "scheme": "hdfc-mid-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "hinglish"}
+{"query": "small cap ka objective kya hai", "scheme": "hdfc-small-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "hinglish"}
+{"query": "large cap fund ka maksad kya hai", "scheme": "hdfc-large-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "hinglish"}
+{"query": "silver fof paisa kahan lagata hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "hinglish"}
+{"query": "multi cap fund kya karta hai", "scheme": "hdfc-multi-cap", "expected_section": "about_the_fund", "type": "about_the_fund", "wording": "hinglish"}
+{"query": "How are gains from HDFC Mid Cap Fund taxed?", "scheme": "hdfc-mid-cap", "expected_section": "tax", "type": "tax", "wording": "plain"}
+{"query": "What tax do I pay when I redeem HDFC Small Cap Fund?", "scheme": "hdfc-small-cap", "expected_section": "tax", "type": "tax", "wording": "plain"}
+{"query": "tax on selling the large cap fund after a year", "scheme": "hdfc-large-cap", "expected_section": "tax", "type": "tax", "wording": "plain"}
+{"query": "How is the HDFC Silver ETF FoF taxed?", "scheme": "hdfc-silver-etf-fof", "expected_section": "tax", "type": "tax", "wording": "plain"}
+{"query": "What is the tax if I redeem HDFC Multi Cap within one year?", "scheme": "hdfc-multi-cap", "expected_section": "tax", "type": "tax", "wording": "plain"}
+{"query": "mid cap taxtion", "scheme": "hdfc-mid-cap", "expected_section": "tax", "type": "tax", "wording": "typo"}
+{"query": "smallcap tax on redemtion", "scheme": "hdfc-small-cap", "expected_section": "tax", "type": "tax", "wording": "typo"}
+{"query": "large cap capital gian tax", "scheme": "hdfc-large-cap", "expected_section": "tax", "type": "tax", "wording": "typo"}
+{"query": "silver fof taxaton rules", "scheme": "hdfc-silver-etf-fof", "expected_section": "tax", "type": "tax", "wording": "typo"}
+{"query": "multicap tax rat", "scheme": "hdfc-multi-cap", "expected_section": "tax", "type": "tax", "wording": "typo"}
+{"query": "mid cap LTCG", "scheme": "hdfc-mid-cap", "expected_section": "tax", "type": "tax", "wording": "abbrev"}
+{"query": "small cap STCG rate", "scheme": "hdfc-small-cap", "expected_section": "tax", "type": "tax", "wording": "abbrev"}
+{"query": "large cap LTCG STCG", "scheme": "hdfc-large-cap", "expected_section": "tax", "type": "tax", "wording": "abbrev"}
+{"query": "silver FoF LTCG", "scheme": "hdfc-silver-etf-fof", "expected_section": "tax", "type": "tax", "wording": "abbrev"}
+{"query": "multi cap STCG", "scheme": "hdfc-multi-cap", "expected_section": "tax", "type": "tax", "wording": "abbrev"}
+{"query": "mid cap bechne par kitna tax lagega", "scheme": "hdfc-mid-cap", "expected_section": "tax", "type": "tax", "wording": "hinglish"}
+{"query": "small cap pe tax kaise lagta hai", "scheme": "hdfc-small-cap", "expected_section": "tax", "type": "tax", "wording": "hinglish"}
+{"query": "large cap ek saal baad bechu toh tax kitna", "scheme": "hdfc-large-cap", "expected_section": "tax", "type": "tax", "wording": "hinglish"}
+{"query": "silver fof pe tax kitna hai", "scheme": "hdfc-silver-etf-fof", "expected_section": "tax", "type": "tax", "wording": "hinglish"}
+{"query": "multi cap ke munafe pe tax kitna lagta hai", "scheme": "hdfc-multi-cap", "expected_section": "tax", "type": "tax", "wording": "hinglish"}
+{"query": "When was HDFC Mid Cap Fund launched?", "scheme": "hdfc-mid-cap", "expected_section": "launch_date", "type": "fund_details", "wording": "plain"}
+{"query": "When did HDFC Small Cap Fund direct plan start?", "scheme": "hdfc-small-cap", "expected_section": "launch_date", "type": "fund_details", "wording": "plain"}
+{"query": "launch date of the large cap fund", "scheme": "hdfc-large-cap", "expected_section": "launch_date", "type": "fund_details", "wording": "plain"}
+{"query": "When was the HDFC silver FoF started?", "scheme": "hdfc-silver-etf-fof", "expected_section": "launch_date", "type": "fund_details", "wording": "plain"}
+{"query": "inception date of HDFC Multi Cap Fund", "scheme": "hdfc-multi-cap", "expected_section": "launch_date", "type": "fund_details", "wording": "plain"}
+{"query": "mid cap fund catagory", "scheme": "hdfc-mid-cap", "expected_section": "category", "type": "fund_details", "wording": "typo"}
+{"query": "smallcap fund categry", "scheme": "hdfc-small-cap", "expected_section": "category", "type": "fund_details", "wording": "typo"}
+{"query": "what type of fund is large cap, catgory", "scheme": "hdfc-large-cap", "expected_section": "category", "type": "fund_details", "wording": "typo"}
+{"query": "silver fof categroy", "scheme": "hdfc-silver-etf-fof", "expected_section": "category", "type": "fund_details", "wording": "typo"}
+{"query": "multicap fund catgory type", "scheme": "hdfc-multi-cap", "expected_section": "category", "type": "fund_details", "wording": "typo"}
+{"query": "mid cap RTA", "scheme": "hdfc-mid-cap", "expected_section": "registrar", "type": "fund_details", "wording": "abbrev"}
+{"query": "small cap RTA name", "scheme": "hdfc-small-cap", "expected_section": "registrar", "type": "fund_details", "wording": "abbrev"}
+{"query": "large cap registrar / RTA", "scheme": "hdfc-large-cap", "expected_section": "registrar", "type": "fund_details", "wording": "abbrev"}
+{"query": "silver FoF RTA", "scheme": "hdfc-silver-etf-fof", "expected_section": "registrar", "type": "fund_details", "wording": "abbrev"}
+{"query": "multi cap R&T agent", "scheme": "hdfc-multi-cap", "expected_section": "registrar", "type": "fund_details", "wording": "abbrev"}
+{"query": "mid cap mein stamp duty kitni lagti hai", "scheme": "hdfc-mid-cap", "expected_section": "stamp_duty", "type": "fund_details", "wording": "hinglish"}
+{"query": "small cap pe stamp duty kya hai", "scheme": "hdfc-small-cap", "expected_section": "stamp_duty", "type": "fund_details", "wording": "hinglish"}
+{"query": "large cap kharidne par stamp duty kitni", "scheme": "hdfc-large-cap", "expected_section": "stamp_duty", "type": "fund_details", "wording": "hinglish"}
+{"query": "silver fof ki stamp duty batao", "scheme": "hdfc-silver-etf-fof", "expected_section": "stamp_duty", "type": "fund_details", "wording": "hinglish"}
+{"query": "multi cap mein stamp duty lagti hai kya", "scheme": "hdfc-multi-cap", "expected_section": "stamp_duty", "type": "fund_details", "wording": "hinglish"}

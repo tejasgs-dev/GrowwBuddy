@@ -1,0 +1,154 @@
+{
+  "source_id": "groww-hdfc-silver-etf-fof",
+  "scheme_key": "hdfc-silver-etf-fof",
+  "url": "https://groww.in/mutual-funds/hdfc-silver-etf-fof-direct-growth",
+  "scheme_name": "HDFC Silver ETF FoF Direct Growth",
+  "parse_method": "next_data_json",
+  "fetched_at": "2026-11-12T10:00:00Z",
+  "as_of_date": "2026-11-11",
+  "as_of_origin": "page",
+  "content_sha256": "d2d57727e71d28f5816fd72f0d3b597838e1928380654343894cd86090308ba2",
+  "fields": {
+    "expense_ratio": {
+      "value": "0.21%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_base": {
+      "value": "0.18%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_history": {
+      "value": "0.21%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_base_history": {
+      "value": "0.18%",
+      "as_on": "2026-11-10"
+    },
+    "exit_load": {
+      "value": "Exit load of 1%, if redeemed within 15 days.",
+      "as_on": null
+    },
+    "min_sip": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "min_lumpsum": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "min_additional": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "riskometer": {
+      "value": "Very High",
+      "as_on": null
+    },
+    "benchmark": {
+      "value": "Domestic Price of Silver",
+      "as_on": null
+    },
+    "benchmark_short": {
+      "value": "Domestic Price of Silver",
+      "as_on": null
+    },
+    "fund_managers": {
+      "value": "Arun Agarwal, Nandita Menezes",
+      "as_on": null
+    },
+    "tax": {
+      "value": "If you redeem within two years, returns are taxed as per your Income Tax slab. If you redeem after two years, returns are taxed at 12.5%.",
+      "as_on": null
+    },
+    "objective": {
+      "value": "The scheme is seek to capital appreciation by investing in units of HDFC Silver ETF (HSETF).",
+      "as_on": null
+    },
+    "category": {
+      "value": "Commodities – Silver",
+      "as_on": null
+    },
+    "launch_date": {
+      "value": "28 Oct 2022",
+      "as_on": null
+    },
+    "registrar": {
+      "value": "Cams",
+      "as_on": null
+    },
+    "stamp_duty": {
+      "value": "0.005% (from July 1st, 2020)",
+      "as_on": null
+    },
+    "fund_house": {
+      "value": "HDFC Mutual Fund",
+      "as_on": null
+    }
+  },
+  "sections": [
+    {
+      "name": "category",
+      "title": "Category",
+      "text": "HDFC Silver ETF FoF Direct Growth is the Direct plan, Growth option of a scheme from HDFC Mutual Fund. Its category is Commodities – Silver."
+    },
+    {
+      "name": "launch_date",
+      "title": "Launch date",
+      "text": "The launch date of HDFC Silver ETF FoF Direct Growth is 28 Oct 2022."
+    },
+    {
+      "name": "registrar",
+      "title": "Registrar",
+      "text": "The registrar and transfer agent of HDFC Silver ETF FoF Direct Growth is Cams."
+    },
+    {
+      "name": "stamp_duty",
+      "title": "Stamp duty",
+      "text": "Stamp duty for HDFC Silver ETF FoF Direct Growth: 0.005% (from July 1st, 2020)."
+    },
+    {
+      "name": "expense_ratio",
+      "title": "Expense ratio",
+      "text": "The expense ratio (TER) of HDFC Silver ETF FoF Direct Growth is 0.18% excluding GST and statutory charges, and 0.21% including them, as on 10 Nov 2026."
+    },
+    {
+      "name": "exit_load",
+      "title": "Exit load",
+      "text": "Exit load of HDFC Silver ETF FoF Direct Growth: Exit load of 1%, if redeemed within 15 days."
+    },
+    {
+      "name": "minimum_investment",
+      "title": "Minimum investment / SIP",
+      "text": "The minimum SIP amount for HDFC Silver ETF FoF Direct Growth is ₹100. The minimum first (lump sum) investment is ₹100. The minimum additional investment is ₹100."
+    },
+    {
+      "name": "riskometer",
+      "title": "Riskometer",
+      "text": "The riskometer classification of HDFC Silver ETF FoF Direct Growth is Very High risk."
+    },
+    {
+      "name": "benchmark",
+      "title": "Benchmark",
+      "text": "The benchmark index of HDFC Silver ETF FoF Direct Growth is Domestic Price of Silver."
+    },
+    {
+      "name": "fund_manager",
+      "title": "Fund manager",
+      "text": "The fund managers of HDFC Silver ETF FoF Direct Growth are Arun Agarwal, Nandita Menezes."
+    },
+    {
+      "name": "about_the_fund",
+      "title": "About the fund",
+      "text": "Investment objective of HDFC Silver ETF FoF Direct Growth: The scheme is seek to capital appreciation by investing in units of HDFC Silver ETF (HSETF)."
+    },
+    {
+      "name": "tax",
+      "title": "Tax",
+      "text": "Tax on redemption of HDFC Silver ETF FoF Direct Growth: If you redeem within two years, returns are taxed as per your Income Tax slab. If you redeem after two years, returns are taxed at 12.5%."
+    }
+  ],
+  "missing": [
+    "lock_in"
+  ]
+}

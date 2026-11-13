@@ -1,0 +1,154 @@
+{
+  "source_id": "groww-hdfc-multi-cap",
+  "scheme_key": "hdfc-multi-cap",
+  "url": "https://groww.in/mutual-funds/hdfc-multi-cap-fund-direct-growth",
+  "scheme_name": "HDFC Multi Cap Fund Direct Growth",
+  "parse_method": "next_data_json",
+  "fetched_at": "2026-11-12T10:00:00Z",
+  "as_of_date": "2026-11-11",
+  "as_of_origin": "page",
+  "content_sha256": "a0cc4e2fb65b516d341cecf594c3da99704a98e84391a6ceb1edc36b141fa9c1",
+  "fields": {
+    "expense_ratio": {
+      "value": "0.95%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_base": {
+      "value": "0.70%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_history": {
+      "value": "0.95%",
+      "as_on": "2026-11-10"
+    },
+    "expense_ratio_base_history": {
+      "value": "0.70%",
+      "as_on": "2026-11-10"
+    },
+    "exit_load": {
+      "value": "Exit load of 1% if redeemed within 1 year.",
+      "as_on": null
+    },
+    "min_sip": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "min_lumpsum": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "min_additional": {
+      "value": "₹100",
+      "as_on": null
+    },
+    "riskometer": {
+      "value": "Very High",
+      "as_on": null
+    },
+    "benchmark": {
+      "value": "Nifty 500 Multicap 50:25:25 Total Return Index",
+      "as_on": null
+    },
+    "benchmark_short": {
+      "value": "Nifty 500 Multicap 50:25:25 TRI",
+      "as_on": null
+    },
+    "fund_managers": {
+      "value": "Amar Kalkundrikar, Dhruv Muchhal",
+      "as_on": null
+    },
+    "tax": {
+      "value": "If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
+      "as_on": null
+    },
+    "objective": {
+      "value": "The scheme seeks to generate long term capital appreciation by investing in equity and equity related securities of large cap, mid cap and small cap companies.",
+      "as_on": null
+    },
+    "category": {
+      "value": "Equity – Multi Cap",
+      "as_on": null
+    },
+    "launch_date": {
+      "value": "10 Dec 2021",
+      "as_on": null
+    },
+    "registrar": {
+      "value": "Cams",
+      "as_on": null
+    },
+    "stamp_duty": {
+      "value": "0.005% (from July 1st, 2020)",
+      "as_on": null
+    },
+    "fund_house": {
+      "value": "HDFC Mutual Fund",
+      "as_on": null
+    }
+  },
+  "sections": [
+    {
+      "name": "category",
+      "title": "Category",
+      "text": "HDFC Multi Cap Fund Direct Growth is the Direct plan, Growth option of a scheme from HDFC Mutual Fund. Its category is Equity – Multi Cap."
+    },
+    {
+      "name": "launch_date",
+      "title": "Launch date",
+      "text": "The launch date of HDFC Multi Cap Fund Direct Growth is 10 Dec 2021."
+    },
+    {
+      "name": "registrar",
+      "title": "Registrar",
+      "text": "The registrar and transfer agent of HDFC Multi Cap Fund Direct Growth is Cams."
+    },
+    {
+      "name": "stamp_duty",
+      "title": "Stamp duty",
+      "text": "Stamp duty for HDFC Multi Cap Fund Direct Growth: 0.005% (from July 1st, 2020)."
+    },
+    {
+      "name": "expense_ratio",
+      "title": "Expense ratio",
+      "text": "The expense ratio (TER) of HDFC Multi Cap Fund Direct Growth is 0.70% excluding GST and statutory charges, and 0.95% including them, as on 10 Nov 2026."
+    },
+    {
+      "name": "exit_load",
+      "title": "Exit load",
+      "text": "Exit load of HDFC Multi Cap Fund Direct Growth: Exit load of 1% if redeemed within 1 year."
+    },
+    {
+      "name": "minimum_investment",
+      "title": "Minimum investment / SIP",
+      "text": "The minimum SIP amount for HDFC Multi Cap Fund Direct Growth is ₹100. The minimum first (lump sum) investment is ₹100. The minimum additional investment is ₹100."
+    },
+    {
+      "name": "riskometer",
+      "title": "Riskometer",
+      "text": "The riskometer classification of HDFC Multi Cap Fund Direct Growth is Very High risk."
+    },
+    {
+      "name": "benchmark",
+      "title": "Benchmark",
+      "text": "The benchmark index of HDFC Multi Cap Fund Direct Growth is Nifty 500 Multicap 50:25:25 Total Return Index (Nifty 500 Multicap 50:25:25 TRI)."
+    },
+    {
+      "name": "fund_manager",
+      "title": "Fund manager",
+      "text": "The fund managers of HDFC Multi Cap Fund Direct Growth are Amar Kalkundrikar, Dhruv Muchhal."
+    },
+    {
+      "name": "about_the_fund",
+      "title": "About the fund",
+      "text": "Investment objective of HDFC Multi Cap Fund Direct Growth: The scheme seeks to generate long term capital appreciation by investing in equity and equity related securities of large cap, mid cap and small cap companies."
+    },
+    {
+      "name": "tax",
+      "title": "Tax",
+      "text": "Tax on redemption of HDFC Multi Cap Fund Direct Growth: If you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%."
+    }
+  ],
+  "missing": [
+    "lock_in"
+  ]
+}

@@ -1,0 +1,1383 @@
+/* GrowwBuddy UI — tokens from stitch_growwbuddy_mutual_fund_ui/growwbuddy_reference_system/DESIGN.md.
+   Dark, quiet, factual: tonal surfaces and thin borders instead of shadows. */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0f1115;
+  --surface-1: #171a21;
+  --surface-2: #1e222b;
+  --surface-3: #262b36;
+  --border: #2a2f3a;
+
+  --text: #e6e8ec;
+  --text-body: #c9ced6;
+  --text-2: #9aa3af;
+  --text-3: #6b7280;
+
+  --accent: #7c8cff;
+  --accent-hover: #909eff;
+  --accent-soft: rgba(124, 140, 255, 0.16);
+  --accent-line: rgba(124, 140, 255, 0.4);
+  --on-accent: #0f1115;
+
+  --amber: #f5b454;
+  --amber-bg: #1f1a14;
+  --amber-line: rgba(245, 180, 84, 0.35);
+  --red: #f87171;
+  --red-bg: #221617;
+  --red-line: rgba(248, 113, 113, 0.35);
+  --blue: #60a5fa;
+  --slate: #94a3b8;
+
+  --font-head: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius: 12px;
+  --header-h: 64px;
+  --sidebar-w: 288px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.icon {
+  flex: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+.section-label {
+  margin: 0;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* ------------------------------------------------------------------ buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 10px 16px;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--accent);
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+}
+
+.btn-small {
+  padding: 4px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-2);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.icon-btn:hover {
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+/* ------------------------------------------------------------------ layout */
+
+.app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topbar {
+  flex: none;
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+}
+
+.topbar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--header-h);
+  padding: 0 24px;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px -6px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.brand-home:hover {
+  background: var(--surface-2);
+}
+
+.brand-name {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brand-tag {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+
+.disclaimer {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--amber-line);
+  background: var(--amber-bg);
+  color: var(--amber);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.column {
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.scroll > .column {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.dock {
+  flex: none;
+  padding: 12px 0 14px;
+  background: var(--bg);
+  border-top: 1px solid rgba(42, 47, 58, 0.6);
+}
+
+/* ------------------------------------------------------------------ sidebar */
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface-1);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.new-chat {
+  width: 100%;
+}
+
+.sidebar-label {
+  margin: 20px 4px 8px;
+}
+
+.sidebar-empty {
+  padding: 4px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-2);
+}
+
+.thread-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.thread {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background-color 0.15s;
+}
+
+.thread:hover {
+  background: var(--surface-2);
+}
+
+.thread.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+
+.thread-open {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thread:hover .thread-open,
+.thread.is-active .thread-open {
+  color: var(--text);
+}
+
+.thread.is-active .thread-open {
+  font-weight: 600;
+}
+
+.thread-delete {
+  opacity: 0.7;
+}
+
+.thread-delete:hover,
+.thread-delete:focus-visible {
+  opacity: 1;
+  color: var(--red);
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.storage-note {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--amber);
+}
+
+.storage-note .icon {
+  margin-top: 2px;
+}
+
+.scope-card {
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(30, 34, 43, 0.6);
+  border: 1px solid var(--border);
+}
+
+.scope-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.scope-text {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-2);
+}
+
+.scrim {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ welcome */
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Flex children may shrink below their content, so the one-line chip strip on phones
+   scrolls inside itself instead of widening the page. */
+.welcome > *,
+.kb,
+.stream,
+.messages {
+  min-width: 0;
+}
+
+.kb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.kb-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.kb-label .icon {
+  color: var(--accent);
+}
+
+.scheme-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-2);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.welcome-card {
+  padding: 24px 28px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(124, 140, 255, 0.08), transparent 60%),
+    var(--surface-2);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.welcome-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.welcome-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--accent);
+}
+
+.welcome h1 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.welcome-text {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--text-body);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-2);
+}
+
+.pill .icon {
+  color: var(--amber);
+}
+
+.examples-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: -10px;
+  padding: 0 4px;
+}
+
+.examples-note {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.example {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  text-align: left;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.example:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--accent-line);
+}
+
+.example:disabled {
+  opacity: 0.6;
+}
+
+.example-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.example-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.example-go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text-2);
+}
+
+.example:hover:not(:disabled) .example-go {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ messages */
+
+.stream {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.msg {
+  display: flex;
+}
+
+.msg--user {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: min(560px, 88%);
+  padding: 10px 16px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--accent-line);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bubble--withheld {
+  border-style: dashed;
+  border-color: var(--red-line);
+  color: var(--text-2);
+  font-style: italic;
+}
+
+.card {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card--amber {
+  border-left: 4px solid var(--amber);
+}
+.card--red {
+  border-left: 4px solid var(--red);
+}
+.card--slate {
+  border-left: 4px solid var(--slate);
+}
+.card--blue {
+  border-left: 4px solid var(--blue);
+}
+
+.card-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card--amber .card-label {
+  color: var(--amber);
+}
+.card--red .card-label {
+  color: var(--red);
+}
+.card--slate .card-label {
+  color: var(--slate);
+}
+.card--blue .card-label {
+  color: var(--blue);
+}
+
+.card-text {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+.card-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(42, 47, 58, 0.8);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-2);
+}
+
+.typing {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.typing-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-dots span {
+    animation: none;
+  }
+  * {
+    transition: none !important;
+  }
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-size: 14px;
+  color: var(--text-body);
+}
+
+.notice > span {
+  flex: 1;
+}
+
+.loading-history {
+  color: var(--text-2);
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------------ composer */
+
+.composer-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.send-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--red-line);
+  background: var(--red-bg);
+  color: var(--red);
+  font-size: 14px;
+}
+
+.send-error-text {
+  flex: 1;
+  color: var(--text);
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 6px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.composer:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.composer.has-warning,
+.composer.has-warning:focus-within {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 1px var(--amber);
+}
+
+.composer-icon {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 4px 0 8px;
+  color: var(--text-2);
+}
+
+.composer.has-warning .composer-icon {
+  color: var(--amber);
+}
+
+.composer textarea {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  max-height: 160px;
+  padding: 8px 4px;
+  border: 0;
+  background: transparent;
+  resize: none;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--text);
+  field-sizing: content;
+}
+
+.composer textarea:focus,
+.composer textarea:focus-visible {
+  outline: none;
+}
+
+.composer textarea::placeholder {
+  color: var(--text-3);
+}
+
+.send-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--on-accent);
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.send-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.send-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.send-btn:disabled {
+  background: var(--surface-3);
+  color: var(--text-2);
+}
+
+.composer-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0 4px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.composer-warning .icon {
+  margin-top: 2px;
+}
+
+.composer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-2);
+}
+
+.composer-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.composer-hint .icon {
+  color: var(--amber);
+}
+
+.composer-count {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ short screens */
+/* Laptops with display scaling (e.g. 1920×1080 at 125% leaves ~700px of height) must
+   still show the whole welcome view, three examples and the composer without scrolling. */
+
+@media (max-height: 860px) {
+  :root {
+    --header-h: 56px;
+  }
+
+  .scroll > .column {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .welcome {
+    gap: 12px;
+  }
+
+  .kb {
+    gap: 6px;
+  }
+
+  .scheme-chips {
+    gap: 6px;
+  }
+
+  .chip {
+    height: 24px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .welcome-card {
+    padding: 16px 24px;
+  }
+
+  .welcome-head {
+    margin-bottom: 6px;
+  }
+
+  .welcome-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .welcome h1 {
+    font-size: 21px;
+    line-height: 28px;
+  }
+
+  .welcome-text {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .pill {
+    margin-top: 10px;
+    padding: 2px 10px;
+    font-size: 12px;
+  }
+
+  .examples-head {
+    margin-bottom: -4px;
+  }
+
+  .examples {
+    gap: 6px;
+  }
+
+  .example {
+    padding: 8px 12px;
+  }
+
+  .example-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .example-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .dock {
+    padding: 8px 0 10px;
+  }
+
+  .composer-wrap {
+    gap: 6px;
+  }
+
+  .composer textarea {
+    min-height: 36px;
+    padding: 6px 4px;
+  }
+
+  .composer-icon,
+  .send-btn {
+    height: 36px;
+  }
+
+  .send-btn {
+    width: 36px;
+  }
+
+  .sidebar-label {
+    margin-top: 14px;
+  }
+}
+
+/* Very short (small laptop at 150%, landscape tablet): drop the decorative extras. */
+@media (max-height: 640px) {
+  .scheme-chips,
+  .welcome-icon,
+  .examples-note {
+    display: none;
+  }
+
+  .scroll > .column {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .welcome {
+    gap: 10px;
+  }
+
+  .welcome-card {
+    padding: 12px 20px;
+  }
+
+  .welcome h1 {
+    font-size: 19px;
+    line-height: 26px;
+  }
+
+  .pill {
+    margin-top: 8px;
+  }
+
+  .example {
+    padding: 6px 12px;
+  }
+
+  .topbar-row {
+    min-height: 52px;
+  }
+}
+
+/* ------------------------------------------------------------------ narrow screens */
+
+@media (max-width: 1023px) {
+  .menu-btn {
+    display: inline-flex;
+    margin-left: -6px;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: min(var(--sidebar-w), 86vw);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0s linear 0.2s;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .sidebar.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.2s ease;
+  }
+
+  .scrim {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar-row {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    min-height: 0;
+    padding: 8px 12px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  /* The disclaimer gets its own full-width row so it's always readable (EC-UI-09). */
+  .disclaimer {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    white-space: normal;
+  }
+
+  .column {
+    padding: 0 16px;
+  }
+
+  .scroll > .column {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .welcome {
+    gap: 14px;
+  }
+
+  .kb {
+    gap: 8px;
+  }
+
+  .kb {
+    align-items: stretch;
+  }
+
+  .kb-label {
+    justify-content: center;
+  }
+
+  .scheme-chips {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .chip {
+    height: 26px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .welcome-card {
+    padding: 16px;
+  }
+
+  .welcome-head {
+    margin-bottom: 6px;
+  }
+
+  .welcome-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .welcome h1 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .welcome-text {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .pill {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .examples-note {
+    display: none;
+  }
+
+  .examples-head {
+    margin-bottom: -6px;
+  }
+
+  .example {
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .example-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .example-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .example-go {
+    display: none;
+  }
+
+  .dock {
+    padding: 10px 0 max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Short phones (e.g. 375×667): keep the three examples and the composer on screen. */
+@media (max-width: 720px) and (max-height: 760px) {
+  .scheme-chips,
+  .welcome-icon {
+    display: none;
+  }
+
+  .scroll > .column {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .welcome {
+    gap: 10px;
+  }
+
+  .welcome-card {
+    padding: 12px 14px;
+  }
+
+  .welcome h1 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .welcome-text {
+    font-size: 13.5px;
+    line-height: 20px;
+  }
+
+  .pill {
+    margin-top: 8px;
+  }
+
+  .examples {
+    gap: 6px;
+  }
+
+  .example {
+    padding: 7px 10px;
+  }
+
+  .example-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .example-text {
+    font-size: 13.5px;
+    line-height: 19px;
+  }
+
+  .dock {
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  }
+}

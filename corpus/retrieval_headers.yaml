@@ -1,0 +1,69 @@
+# Retrieval headers (implementation plan, task 2.4). Facts-only. No investment advice.
+#
+# Each chunk is embedded as "<header>\n<text>", where the header is
+#   <scheme name> (<aliases>) | <section title> | <keyword> | <keyword> ...
+# Only the embedding sees the header; the model and the user see the plain section text.
+# In the Phase 2 data research this header was the biggest single retrieval gain.
+#
+# This is data, not code: if the Phase 6 eval shows retrieval misses, tune the keywords
+# here first. Changing this file changes every chunk's embed_text, so the next ingest
+# re-embeds everything.
+#
+# Scheme aliases are shared with the router (Phase 3, EC-INT-21, EC-INT-23). Only add
+# a former scheme name after checking it against an official source. Not added yet,
+# because none of the five pages confirms them:
+#   - "HDFC Top 100 Fund" (believed former name of HDFC Large Cap Fund)
+#   - "HDFC Mid-Cap Opportunities Fund" (believed former name of HDFC Mid Cap Fund;
+#     Groww's footer links to the mid cap page with this label, but doesn't say it
+#     was renamed)
+
+schemes:
+  hdfc-mid-cap:
+    aliases: [mid cap, midcap, mid-cap, hdfc midcap]
+  hdfc-small-cap:
+    aliases: [small cap, smallcap, small-cap, hdfc smallcap]
+  hdfc-large-cap:
+    aliases: [large cap, largecap, large-cap, hdfc largecap]
+  hdfc-silver-etf-fof:
+    aliases: [silver etf fof, silver fof, silver fund, silver etf, hdfc silver, fund of funds]
+  hdfc-multi-cap:
+    aliases: [multi cap, multicap, multi-cap, hdfc multicap]
+
+sections:
+  # Keywords cover common abbreviations (EC-INT-23), plain paraphrases and common
+  # Hinglish words (EC-INT-24). Don't add misspellings; the router fixes those.
+  expense_ratio:
+    keywords: [TER, total expense ratio, base expense ratio, annual fee, yearly fees,
+               fund charges, management fee, cost of the fund, GST, saalana kharcha, fees kitni]
+  exit_load:
+    keywords: [EL, exit fee, redemption charge, withdrawal penalty, early exit, selling charge,
+               charge for redeeming early, paisa nikalne par charge, jaldi bechne par katega]
+  minimum_investment:
+    keywords: [minimum SIP, min SIP, SIP amount, lump sum, lumpsum, minimum amount,
+               start investing, kam se kam kitna]
+  riskometer:
+    keywords: [risk level, risk rating, how risky, risk category, risk-o-meter, risky,
+               kitna risk, khatra]
+  benchmark:
+    keywords: [benchmark index, index it tracks, compared against, TRI, bm,
+               kis index ko track karta hai]
+  fund_manager:
+    keywords: [FM, fund mgr, who manages, managed by, who runs the fund, portfolio manager,
+               fund managers names, kaun manage karta hai]
+  about_the_fund:
+    keywords: [investment objective, obj, objective, goal, strategy, what it invests in,
+               where the money goes, aim of the fund, maksad, kahan paisa lagata hai]
+  tax:
+    keywords: [taxation, capital gains tax, LTCG, STCG, tax on redemption, tax rate,
+               tax kitna lagega]
+  lock_in:
+    keywords: [lock-in period, lock in, holding period]
+  category:
+    keywords: [fund category, category, fund type, scheme type, kind of fund,
+               direct plan growth option]
+  launch_date:
+    keywords: [inception date, launched, start date, when did it start]
+  registrar:
+    keywords: [RTA, registrar and transfer agent, R&T agent, registrar name]
+  stamp_duty:
+    keywords: [stamp duty charge, duty on purchase, stamp tax]

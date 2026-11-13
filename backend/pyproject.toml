@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "growwbuddy"
+version = "0.1.0"
+description = "Facts-only mutual fund FAQ assistant for five HDFC schemes on Groww. No investment advice."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "groq>=0.30",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "sqlalchemy>=2.0",
+    "sentence-transformers>=3.0",
+    "numpy>=1.26",
+    "beautifulsoup4>=4.12",
+    "httpx>=0.27",
+    "pyyaml>=6.0",
+    "apscheduler>=3.10,<4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "types-PyYAML",
+    "pip-audit>=2.7",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["growwbuddy"]
+
+# ---------- ruff ----------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["prompts", "eval"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+# Fund text is Indian English: en dashes, the rupee sign and Unicode spaces are intended.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------- mypy ----------
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
+packages = ["growwbuddy", "tests"]
+
+[[tool.mypy.overrides]]
+# Third-party packages without type hints; narrow this list as phases add imports.
+module = ["apscheduler.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# Huge ML packages: don't type-check into them (only imported lazily in retrieval/embed.py).
+module = ["sentence_transformers.*", "transformers.*", "torch.*"]
+follow_imports = "skip"
+follow_untyped_imports = false
+ignore_missing_imports = true
+
+# ---------- pytest ----------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-ra"
+markers = [
+    "model: needs the real embedding model (skipped unless GROWWBUDDY_RUN_MODEL_TESTS=1)",
+]
