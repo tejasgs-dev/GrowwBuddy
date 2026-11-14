@@ -4,7 +4,9 @@
 
 > **Facts-only. No investment advice.** GrowwBuddy never recommends, compares or predicts funds, and never shares returns or NAV figures.
 
-**Hosting:** set up for Render's free plan ([deployment plan](docs/deployment-plan.md)). The free plan sleeps when idle, so the first visit can take about a minute, and chats reset when the service restarts.
+**Live demo:** https://growwbuddy.onrender.com
+
+> Hosted on Render's free plan ([deployment plan](docs/deployment-plan.md)), which sleeps when idle. The first load can take about a minute, and chats reset when the service restarts.
 
 ## What it covers
 

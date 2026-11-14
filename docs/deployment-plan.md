@@ -14,6 +14,9 @@ target" open decision in [implementation-plan.md](implementation-plan.md).
 Files: [`Dockerfile`](../Dockerfile), [`.dockerignore`](../.dockerignore),
 [`render.yaml`](../render.yaml).
 
+**Live:** https://growwbuddy.onrender.com (matches `GROWWBUDDY_FRONTEND_ORIGIN` in
+`render.yaml`).
+
 ---
 
 ## Target setup (free tier)
