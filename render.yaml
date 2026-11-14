@@ -32,3 +32,6 @@ services:
         value: https://growwbuddy.onrender.com   # update if Render assigns another name
       - key: GROWWBUDDY_STALE_DAYS
         value: "3"
+      # Model-answered messages per client per minute (default 2).
+      - key: GROWWBUDDY_CLIENT_PER_MINUTE
+        value: "4"

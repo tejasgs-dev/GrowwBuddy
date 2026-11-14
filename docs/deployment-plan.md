@@ -151,9 +151,11 @@ refresh), so nothing outside the container changes.
 | `GROQ_MODEL`, `GROWWBUDDY_REASONING_EFFORT` | `render.yaml` | `openai/gpt-oss-120b`, `low` |
 | `GROWWBUDDY_INDEX_REPO`, `GROWWBUDDY_INDEX_POLL_MINUTES` | `render.yaml` | `tejasgs-dev/GrowwBuddy`, `60` |
 | `GROWWBUDDY_FRONTEND_ORIGIN` | `render.yaml` | The service URL |
+| `GROWWBUDDY_STALE_DAYS` | `render.yaml` | `3` |
+| `GROWWBUDDY_CLIENT_PER_MINUTE` | `render.yaml` | `4` (default 2). Equal to the per-IP limit (`GROWWBUDDY_IP_PER_MINUTE`, default 4), so one client can use a whole IP's minute allowance. Groq's free tier still allows only about 3 model-answered messages a minute in total; past that, the busy reply. |
 | `GROWWBUDDY_EMBED_RUNTIME`, `GROWWBUDDY_EMBED_THREADS`, `GROWWBUDDY_EMBED_MODEL`, `HF_HOME`, `HF_HUB_OFFLINE` | `Dockerfile` | `onnx`, `1`, `intfloat/e5-small-v2`, `/opt/hf`, `1` |
 | `PORT` | Render | `10000` |
-| Everything else | `config.py` defaults | Groq free-tier limits, per-client limits, 3-day staleness |
+| Everything else | `config.py` defaults | Groq free-tier limits, the other per-client and per-IP limits |
 
 ### Exit check
 
