@@ -25,7 +25,7 @@ from typing import Protocol
 
 from growwbuddy.constants import STALE_NOTE
 from growwbuddy.llm.client import StructuredLLM
-from growwbuddy.obs import note
+from growwbuddy.obs import note, timed
 from growwbuddy.pipeline import refusals
 from growwbuddy.pipeline.formatter import answer_response, template_response
 from growwbuddy.pipeline.generator import Generation, generate
@@ -168,12 +168,14 @@ class Pipeline:
 
     async def handle_message(self, text: str, history: Sequence[Turn] = ()) -> Response:
         resp, stage = await self._handle(text, history)
-        problems = check_response(resp)
+        with timed("final_check"):
+            problems = check_response(resp)
         if problems:
             # Should never happen: the templates and formatter are built to pass.
             log.error("response failed final check type=%s problems=%s", resp.type, problems)
             resp = self._fallback(resp.scheme)
-        resp = self._mark_if_stale(resp)
+        with timed("stale_check"):  # one sources_state read
+            resp = self._mark_if_stale(resp)
         note(stage=stage)
         log.info(
             "message handled stage=%s type=%s reason=%s scheme=%s",
@@ -197,13 +199,15 @@ class Pipeline:
             return Response(type="pii_rejected", text=refusals.PII, reason="pii"), "pii"
 
         # 2. Stage 1 rules: no model call.
-        prior = history_scheme(history)
-        rule = decide(text, self.headers)
+        with timed("rules"):
+            prior = history_scheme(history)
+            rule = decide(text, self.headers)
         if rule is not None:
             return self._from_rule(rule, prior), f"rules:{rule.kind}"
 
         # 3. Stage 2 LLM router.
-        outcome = await classify(text, history, self.llm, self.history_turns)
+        with timed("router"):
+            outcome = await classify(text, history, self.llm, self.history_turns)
         if outcome.decision is None:
             if outcome.result.rate_limited:
                 return self._busy(), "router"
@@ -276,7 +280,8 @@ class Pipeline:
 
     async def _answer(self, query: str, scheme: str) -> Response:
         try:
-            retrieval = await asyncio.to_thread(self.retriever.retrieve, query, scheme)
+            with timed("retrieval"):  # includes the `embed` step
+                retrieval = await asyncio.to_thread(self.retriever.retrieve, query, scheme)
         except (IndexNotReadyError, MixedIndexError, EmbedderUnavailableError) as e:
             log.error("retrieval unavailable: %s", type(e).__name__)
             return self._unavailable("index_unavailable")
@@ -285,7 +290,10 @@ class Pipeline:
 
         feedback: tuple[str, ...] = ()
         for attempt in range(MAX_ANSWER_ATTEMPTS):
-            gen: Generation = await generate(query, retrieval.items, self.llm, feedback=feedback)
+            with timed("generation"):
+                gen: Generation = await generate(
+                    query, retrieval.items, self.llm, feedback=feedback
+                )
             if gen.failure == "busy":
                 return self._busy()
             if gen.failure == "unavailable":
@@ -302,7 +310,8 @@ class Pipeline:
             if not answer.is_answer:  # EC-GEN-08, 09
                 note(validator="not_answerable")
                 return self._not_found(scheme)
-            check = validate_answer(answer, retrieval, scheme, self.headers)
+            with timed("validation"):
+                check = validate_answer(answer, retrieval, scheme, self.headers)
             if check.action == "advice":
                 note(validator="advice")
                 return self._refusal("advisory", scheme)

@@ -31,6 +31,7 @@ from growwbuddy.constants import (
     SOURCES,
     expense_ratio_phrase,
 )
+from growwbuddy.obs import timed
 from growwbuddy.retrieval.embed import Embedder
 from growwbuddy.retrieval.vector import (
     IndexedChunk,
@@ -204,7 +205,9 @@ class Retriever:
         by_id = {c.chunk_id: c for c in self.index.chunks()}
         facts = self._facts(query, scheme, by_id)
 
-        hits = self.index.search(self.embedder.embed_query(query), scheme, self.k)
+        with timed("embed"):
+            vec = self.embedder.embed_query(query)
+        hits = self.index.search(vec, scheme, self.k)
         chunks = [
             ContextItem(
                 item_id=h.chunk.chunk_id,
@@ -322,12 +325,22 @@ class Retriever:
         return when
 
     def ready(self) -> bool:
-        """True when a usable index is loaded (EC-RET-06): built, non-empty, right model."""
+        """True when a usable index is loaded (EC-RET-06): built, non-empty, right model,
+        and the embedding model is in memory (an embedder without a `loaded` flag, such as
+        the tests' fake, counts as loaded)."""
+        if not getattr(self.embedder, "loaded", True):
+            return False
         try:
             self.index.refresh_if_changed()
         except (IndexNotReadyError, MixedIndexError):
             return False
         return len(self.index) > 0
+
+    def warm_up(self) -> None:
+        """Load the embedding model now (server startup). Raises EmbedderUnavailableError."""
+        warm = getattr(self.embedder, "warm_up", None)
+        if warm is not None:
+            warm()
 
     def newest_date(self) -> date | None:
         try:

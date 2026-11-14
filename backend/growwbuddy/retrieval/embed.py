@@ -49,7 +49,8 @@ def normalise_rows(m: npt.NDArray[Any]) -> Vectors:
 
 
 class E5Embedder:
-    """`intfloat/e5-*` models via sentence-transformers. Loads the model once, on first use."""
+    """`intfloat/e5-*` models via sentence-transformers. Loads the model once: at server
+    startup (`warm_up`), or on first use elsewhere (ingest, CLI)."""
 
     QUERY_PREFIX = "query: "
     PASSAGE_PREFIX = "passage: "
@@ -62,6 +63,16 @@ class E5Embedder:
     @property
     def model_name(self) -> str:
         return self._model_name
+
+    @property
+    def loaded(self) -> bool:
+        return self._model is not None
+
+    def warm_up(self) -> None:
+        """Load the model and run one query, so the first real question doesn't wait for
+        it (~25 s on a cold start: importing torch and sentence-transformers, plus the
+        Hugging Face Hub checks). The server calls this before it reports ready."""
+        self.embed_query("warm up")
 
     def _load(self) -> Any:
         if self._model is None:

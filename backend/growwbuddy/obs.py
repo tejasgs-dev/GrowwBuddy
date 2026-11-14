@@ -13,10 +13,11 @@ from __future__ import annotations
 import json
 import logging
 import sys
+import time
 from collections.abc import Iterator, Mapping
 from contextlib import contextmanager
 from contextvars import ContextVar
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
@@ -35,6 +36,15 @@ class RequestStats:
     stage: str | None = None
     # pass | retry_pass | fail | advice | performance | not_answerable; None = no model answer
     validator: str | None = None
+    # Wall time per step, in ms, summed when a step runs more than once (a retry).
+    timings_ms: dict[str, float] = field(default_factory=dict)
+
+    def add_time(self, step: str, seconds: float) -> None:
+        self.timings_ms[step] = self.timings_ms.get(step, 0.0) + 1000 * seconds
+
+    def timings_text(self) -> str:
+        """`step:ms,step:ms` in the order the steps ran; `-` when none ran."""
+        return ",".join(f"{k}:{round(v)}" for k, v in self.timings_ms.items()) or "-"
 
     def add_llm_call(self, usage: Mapping[str, int]) -> None:
         self.llm_calls += 1
@@ -81,6 +91,23 @@ def note(*, stage: str | None = None, validator: str | None = None) -> None:
         stats.stage = stage
     if validator is not None:
         stats.validator = validator
+
+
+def record_time(step: str, seconds: float) -> None:
+    stats = _stats.get()
+    if stats is not None:
+        stats.add_time(step, seconds)
+
+
+@contextmanager
+def timed(step: str) -> Iterator[None]:
+    """Add the block's wall time to `step` on the current request (a no-op outside one).
+    Works inside `asyncio.to_thread`, which copies the context."""
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        record_time(step, time.perf_counter() - start)
 
 
 def record_llm_call(usage: Mapping[str, int]) -> None:

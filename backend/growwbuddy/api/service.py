@@ -29,7 +29,7 @@ from typing import Protocol
 
 from growwbuddy.api.limits import MessageLimiter
 from growwbuddy.api.locks import ThreadLocks
-from growwbuddy.obs import current_stats, note, set_thread_id
+from growwbuddy.obs import current_stats, note, record_time, set_thread_id, timed
 from growwbuddy.pipeline import refusals
 from growwbuddy.pipeline.orchestrator import needs_model, should_store
 from growwbuddy.pipeline.pii_guard import check as pii_check
@@ -54,6 +54,9 @@ class Services:
     # Per-client/IP limits on model-answered messages (6.4); None means no limit.
     limiter: MessageLimiter | None = None
     needs_model: Callable[[str], bool] = needs_model
+    # Loads slow resources (the embedding model) at startup, before the server reports
+    # ready; None in tests.
+    warm_up: Callable[[], None] | None = None
 
 
 @dataclass(frozen=True)
@@ -92,38 +95,52 @@ async def send_message(
 ) -> SendResult:
     started = time.monotonic()
     set_thread_id(thread_id)
+    lock_started = time.perf_counter()
     async with svc.locks.hold(thread_id):
-        thread = await asyncio.to_thread(svc.store.get, thread_id, client_id)
+        # Time spent queued behind earlier messages in the same thread (4.3).
+        record_time("lock_wait", time.perf_counter() - lock_started)
+        with timed("db_read"):
+            thread = await asyncio.to_thread(svc.store.get, thread_id, client_id)
         if thread is None:
             raise ThreadNotFoundError(thread_id)
 
         if client_message_id is not None:
-            earlier = await asyncio.to_thread(svc.store.find_reply, thread_id, client_message_id)
+            with timed("db_read"):
+                earlier = await asyncio.to_thread(
+                    svc.store.find_reply, thread_id, client_message_id
+                )
             if earlier is not None:
                 note(stage="duplicate")
                 log.info("duplicate send; returning stored reply message_id=%s", earlier.id)
                 return SendResult(thread, response_from_stored(earlier), earlier.id)
 
-        pii = pii_check(text)
+        with timed("input_checks"):  # PII guard and the per-client limits
+            pii = pii_check(text)
+            limited = None if pii.found else _over_limit(svc, client_id, client_ip, text)
         if pii.found:
             note(stage="pii")
             log.info("pii rejected types=%s", ",".join(pii.types))
             resp = Response(type="pii_rejected", text=refusals.PII, reason="pii")
-        elif (limited := _over_limit(svc, client_id, client_ip, text)) is not None:
+        elif limited is not None:
             resp = limited
         else:
-            history = await asyncio.to_thread(svc.store.recent_turns, thread_id, svc.history_turns)
-            resp = await _run_pipeline(svc.pipeline, text, history)
+            with timed("db_read"):
+                history = await asyncio.to_thread(
+                    svc.store.recent_turns, thread_id, svc.history_turns
+                )
+            with timed("pipeline"):
+                resp = await _run_pipeline(svc.pipeline, text, history)
 
         message_id: str | None = None
         if should_store(resp):
-            saved = await asyncio.to_thread(
-                svc.store.append_exchange,
-                thread_id,
-                text,
-                resp,
-                client_message_id=client_message_id,
-            )
+            with timed("db_write"):
+                saved = await asyncio.to_thread(
+                    svc.store.append_exchange,
+                    thread_id,
+                    text,
+                    resp,
+                    client_message_id=client_message_id,
+                )
             if saved is None:
                 log.info("thread deleted during reply; reply discarded")
                 raise ThreadNotFoundError(thread_id)
@@ -164,7 +181,7 @@ def _log_summary(resp: Response, *, stored: bool, started: float) -> None:
     log.info(
         "message done type=%s reason=%s scheme=%s stage=%s validator=%s stored=%s "
         "llm_calls=%d tokens=%d prompt_tokens=%d completion_tokens=%d cached_tokens=%d "
-        "latency_ms=%d",
+        "latency_ms=%d steps=%s",
         resp.type,
         resp.reason,
         resp.scheme,
@@ -177,4 +194,5 @@ def _log_summary(resp: Response, *, stored: bool, started: float) -> None:
         stats.completion_tokens if stats else 0,
         stats.cached_tokens if stats else 0,
         round(1000 * (time.monotonic() - started)),
+        stats.timings_text() if stats else "-",
     )

@@ -20,6 +20,7 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import logging
+import time
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
@@ -38,6 +39,7 @@ from growwbuddy.api.schemas import HealthOut
 from growwbuddy.api.service import Services
 from growwbuddy.config import Settings, settings
 from growwbuddy.obs import configure_logging, install_record_factory
+from growwbuddy.retrieval.embed import EmbedderUnavailableError
 
 log = logging.getLogger(__name__)
 
@@ -86,6 +88,7 @@ def build_services(s: Settings) -> Services:
         newest_date=retriever.newest_date,
         history_turns=s.history_turns,
         limiter=limiter,
+        warm_up=retriever.warm_up,
     )
 
 
@@ -118,6 +121,17 @@ def create_app(
         if getattr(app.state, "services", None) is None:
             app.state.services = build_services(s)
         svc: Services = app.state.services
+        if svc.warm_up is not None:
+            # Before `yield`: uvicorn accepts requests (and /healthz answers) only after
+            # this, so the first question never waits for the embedding model.
+            started = time.perf_counter()
+            try:
+                await asyncio.to_thread(svc.warm_up)
+                log.info("embedding model loaded in %.1f s", time.perf_counter() - started)
+            except EmbedderUnavailableError as e:
+                # Stay up: /healthz says ready=false and factual questions get the
+                # "temporarily unavailable" reply; the next question retries the load.
+                log.error("embedding model failed to load: %s", e)
         if not await asyncio.to_thread(svc.ready):
             log.warning("index not ready: run `make ingest`; factual questions will fail")
         sweeper = (
