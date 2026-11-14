@@ -68,7 +68,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install -e backend
+          python -m pip install -e "backend[torch]"
 
       - name: Download the previous bundle
         id: prev

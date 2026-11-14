@@ -14,7 +14,10 @@ dependencies = [
     "pydantic>=2.8",
     "pydantic-settings>=2.4",
     "sqlalchemy>=2.0",
-    "sentence-transformers>=3.0",
+    # Embeddings with ONNX Runtime (GROWWBUDDY_EMBED_RUNTIME=onnx): no torch needed.
+    "onnxruntime>=1.18",
+    "tokenizers>=0.19",
+    "huggingface-hub>=0.23",
     "numpy>=1.26",
     "beautifulsoup4>=4.12",
     "httpx>=0.27",
@@ -23,7 +26,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# The default torch runtime (sentence-transformers): ingest, the daily refresh, local dev.
+# The container leaves it out and runs with GROWWBUDDY_EMBED_RUNTIME=onnx.
+torch = [
+    "sentence-transformers>=3.0",
+]
 dev = [
+    "growwbuddy[torch]",
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
     "ruff>=0.6",
@@ -58,7 +67,7 @@ packages = ["growwbuddy", "tests"]
 
 [[tool.mypy.overrides]]
 # Third-party packages without type hints; narrow this list as phases add imports.
-module = ["apscheduler.*"]
+module = ["apscheduler.*", "onnxruntime.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

@@ -68,6 +68,12 @@ class Settings(BaseSettings):
     # --- Retrieval ---
     # Vectors live in the db_url database; there is no separate vector store.
     embed_model: str = "intfloat/e5-small-v2"
+    # How the embedding model runs. "torch": sentence-transformers (ingest, CI, the daily
+    # refresh). "onnx": ONNX Runtime with the repo's model.onnx; same vectors, about half the
+    # memory, no torch import (the Render free tier, docs/deployment-plan.md).
+    embed_runtime: Literal["torch", "onnx"] = "torch"
+    # ONNX Runtime threads; 0 = one per core. Set 1 on a fractional-CPU host.
+    embed_threads: int = Field(default=0, ge=0)
     history_turns: int = Field(default=6, ge=0)
     # Low-confidence cutoff (task 6.3): the top score, and the gap between the top two
     # scores. None switches that check off. See docs/implementation-plan.md, Phase 6 results.

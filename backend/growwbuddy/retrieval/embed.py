@@ -2,7 +2,8 @@
 
 The default `E5Embedder` uses `intfloat/e5-small-v2` (384 dims, CPU), chosen in the Phase 2
 data research. e5 models need the `query: ` / `passage: ` prefixes. Vectors are
-L2-normalised, so a dot product is the cosine similarity.
+L2-normalised, so a dot product is the cosine similarity. `OnnxE5Embedder` runs the same
+model without torch (`GROWWBUDDY_EMBED_RUNTIME=onnx`) for small hosts.
 
 Tests use a fake embedder, so CI never downloads the model.
 """
@@ -105,6 +106,96 @@ class E5Embedder:
         return vec
 
 
+class OnnxE5Embedder:
+    """The same `intfloat/e5-*` model run with ONNX Runtime instead of torch
+    (`GROWWBUDDY_EMBED_RUNTIME=onnx`), for small hosts: the server then never imports torch.
+
+    Uses the fp32 `model.onnx` the model repository publishes, and repeats what the
+    sentence-transformers pipeline does for e5 (the repo's modules.json): tokenise with
+    truncation at 512 tokens, mean-pool the last hidden state over the attention mask,
+    L2-normalise. The vectors match the torch ones to float precision, so an index built
+    by either runtime works with the other and `model_name` stays the same.
+    """
+
+    QUERY_PREFIX = E5Embedder.QUERY_PREFIX
+    PASSAGE_PREFIX = E5Embedder.PASSAGE_PREFIX
+    MAX_TOKENS = 512  # the repo's sentence_bert_config.json max_seq_length
+    BATCH = 32
+
+    def __init__(self, model_name: str = "intfloat/e5-small-v2", threads: int = 0) -> None:
+        self._model_name = model_name
+        self._threads = threads  # 0: ONNX Runtime's default (one per core)
+        self._session: Any = None
+        self._tokenizer: Any = None
+
+    @property
+    def model_name(self) -> str:
+        return self._model_name
+
+    @property
+    def loaded(self) -> bool:
+        return self._session is not None
+
+    def warm_up(self) -> None:
+        """Load the model and run one query (see E5Embedder.warm_up)."""
+        self.embed_query("warm up")
+
+    def _load(self) -> tuple[Any, Any]:
+        if self._session is None:
+            try:
+                import onnxruntime as ort
+                from huggingface_hub import hf_hub_download
+                from tokenizers import Tokenizer
+
+                tok = Tokenizer.from_file(hf_hub_download(self._model_name, "tokenizer.json"))
+                tok.enable_truncation(max_length=self.MAX_TOKENS)
+                tok.enable_padding()
+                opts = ort.SessionOptions()
+                if self._threads > 0:
+                    opts.intra_op_num_threads = self._threads
+                    opts.inter_op_num_threads = 1
+                session = ort.InferenceSession(
+                    hf_hub_download(self._model_name, "model.onnx"),
+                    sess_options=opts,
+                    providers=["CPUExecutionProvider"],
+                )
+            except Exception as e:  # network, disk, a bad model name, or no ONNX export
+                raise EmbedderUnavailableError(
+                    f"could not load ONNX embedding model '{self._model_name}': {e}\n"
+                    "The model repository must publish model.onnx and tokenizer.json. "
+                    "Connect to the internet once to download them, or set "
+                    "GROWWBUDDY_EMBED_RUNTIME=torch."
+                ) from e
+            self._tokenizer, self._session = tok, session
+        return self._tokenizer, self._session
+
+    def _encode(self, texts: list[str]) -> Vectors:
+        tok, session = self._load()
+        wanted = {i.name for i in session.get_inputs()}
+        out: list[Vectors] = []
+        for start in range(0, len(texts), self.BATCH):
+            enc = tok.encode_batch(texts[start : start + self.BATCH])
+            ids = np.array([e.ids for e in enc], dtype=np.int64)
+            mask = np.array([e.attention_mask for e in enc], dtype=np.int64)
+            feeds = {"input_ids": ids, "attention_mask": mask}
+            if "token_type_ids" in wanted:
+                feeds["token_type_ids"] = np.array([e.type_ids for e in enc], dtype=np.int64)
+            hidden = session.run(None, feeds)[0]  # (batch, tokens, dim)
+            m = mask[:, :, None].astype(np.float32)
+            pooled = (hidden * m).sum(axis=1) / np.clip(m.sum(axis=1), 1e-9, None)
+            out.append(normalise_rows(pooled))
+        return np.concatenate(out, axis=0)
+
+    def embed_passages(self, texts: Sequence[str]) -> Vectors:
+        if not texts:
+            return np.zeros((0, 0), dtype=np.float32)
+        return self._encode([self.PASSAGE_PREFIX + t for t in texts])
+
+    def embed_query(self, text: str) -> Vectors:
+        vec: Vectors = self._encode([self.QUERY_PREFIX + text])[0]
+        return vec
+
+
 def make_embedder(s: Settings | None = None) -> Embedder:
     if s is None:
         from growwbuddy.config import settings
@@ -115,4 +206,6 @@ def make_embedder(s: Settings | None = None) -> Embedder:
         raise EmbedderUnavailableError(
             f"no embedder for '{s.embed_model}'; only intfloat/e5-* models are supported"
         )
+    if s.embed_runtime == "onnx":
+        return OnnxE5Embedder(s.embed_model, threads=s.embed_threads)
     return E5Embedder(s.embed_model)

@@ -1,0 +1,20 @@
+# Keep secrets, runtime data and build output out of the image (docs/deployment-plan.md).
+.git
+.github
+.venv
+.vscode
+.env
+.env.*
+!.env.example
+data/
+corpus/raw/
+frontend/node_modules/
+frontend/dist/
+backend/eval/
+backend/tests/
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/*.egg-info/
+stitch_growwbuddy_mutual_fund_ui/
