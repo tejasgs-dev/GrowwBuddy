@@ -532,7 +532,7 @@ Built as planned, styled from the Stitch export in `stitch_growwbuddy_mutual_fun
 
 **Task 6.2 notes: running the eval within Groq's limits**
 
-*Why it needs care:* the golden set is about 100 items. If ~60–70 of them reach the model at ~2,500 tokens each, a full run uses about 150–175K tokens. That's most of a day's 200K, shared with everything else on the API key.
+*Why it needs care:* the golden set is about 100 items. 73 of its turns reach the model; at the measured ~1,950 tokens each (see "Groq rate limits and budget"), a full run uses about 140K tokens (73 × 1,950 ≈ 142K). That fits in one day within the runner's 180K (the 200K daily limit minus the 20K reserve) if the day's budget is mostly unused; the 200K is shared with everything else on the API key, so otherwise the run checkpoints and continues with `--resume`.
 
 How the runner keeps within the limits:
 - **Rule-handled items first:** PII, advisory and NAV/performance items cost nothing, so they run first, without throttling.
@@ -556,7 +556,7 @@ Tests: the guard returns busy and makes no Groq call once the minute or day budg
 
 ### Phase 6 results (13 Nov 2026)
 
-Everything that can be built and checked offline is done. **The live-model eval (6.2) has not been run yet**, so the exit-check metrics below are still open. A full run uses about 180K tokens (73 of the golden items' turns reach the model), which is most of a free-tier day, so expect it to need `--resume` the next day.
+Everything that can be built and checked offline is done. **The live-model eval (6.2) has not been run yet**, so the exit-check metrics below are still open. 73 of the golden items' turns reach the model; at the measured ~1,950 tokens each, a full run uses about 140K tokens. That should fit in one day within the runner's 180K (the 200K daily limit minus the 20K reserve), as long as the app hasn't used much of the day's budget; if it has, the run checkpoints and continues with `--resume`.
 
 | Task | What was built | Where |
 |---|---|---|
