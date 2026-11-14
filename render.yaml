@@ -32,6 +32,7 @@ services:
         value: https://growwbuddy.onrender.com   # update if Render assigns another name
       - key: GROWWBUDDY_STALE_DAYS
         value: "3"
-      # Model-answered messages per client per minute (default 2).
+      # Model-answered messages per client per minute (default 2). 3 = the whole Groq
+      # free-tier budget (~1,950 tokens per question): a fairness limit, not the ceiling.
       - key: GROWWBUDDY_CLIENT_PER_MINUTE
-        value: "4"
+        value: "3"

@@ -79,7 +79,7 @@ make serve                        # open http://localhost:8000
 
 - **Small scope:** only the five schemes above. Questions about other funds get a polite "out of scope" reply.
 - **Some topics aren't on the pages**, such as how to download a statement, so those get a "not found" reply.
-- **Groq free tier:** about 3 AI-answered messages a minute and 80 a day in total. Past that, users get a "busy, try again" reply. Rule-handled messages don't count.
+- **Groq free tier:** an AI-answered question uses about 1,950 tokens (measured), so the app can answer about 3 a minute and 80 a day in total, across all users. Past that, users get a "busy, try again" reply. Rule-handled messages don't count. The per-user limit (3 a minute) is for fairness, so one person can't use up the shared allowance; the Groq budget is the overall ceiling.
 - **Facts can lag** by up to a day. Answers add "(source may be out of date)" if the data is more than 3 days old.
 - **PII detection is pattern-based**, so it can reject a harmless number. It errs on the side of rejecting.
 - **English** (Hinglish and typos are understood, but replies are in English).

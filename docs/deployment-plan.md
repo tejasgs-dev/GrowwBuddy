@@ -155,7 +155,7 @@ refresh), so nothing outside the container changes.
 | `GROWWBUDDY_INDEX_REPO`, `GROWWBUDDY_INDEX_POLL_MINUTES` | `render.yaml` | `tejasgs-dev/GrowwBuddy`, `60` |
 | `GROWWBUDDY_FRONTEND_ORIGIN` | `render.yaml` | The service URL |
 | `GROWWBUDDY_STALE_DAYS` | `render.yaml` | `3` |
-| `GROWWBUDDY_CLIENT_PER_MINUTE` | `render.yaml` | `4` (default 2). Equal to the per-IP limit (`GROWWBUDDY_IP_PER_MINUTE`, default 4), so one client can use a whole IP's minute allowance. Groq's free tier still allows only about 3 model-answered messages a minute in total; past that, the busy reply. |
+| `GROWWBUDDY_CLIENT_PER_MINUTE` | `render.yaml` | `3` (default 2). A question uses ~1,950 tokens (measured on Render: router ~910 + answer ~1,020), so Groq's free tier allows about 3 a minute and 80 a day across all users; past that, the busy reply. The per-user limit is for fairness, so one person can't use up the shared allowance; the Groq budget guard is the overall ceiling. |
 | `GROWWBUDDY_EMBED_RUNTIME`, `GROWWBUDDY_EMBED_THREADS`, `GROWWBUDDY_EMBED_MODEL`, `HF_HOME`, `HF_HUB_OFFLINE` | `Dockerfile` | `onnx`, `1`, `intfloat/e5-small-v2`, `/opt/hf`, `1` |
 | `PORT` | Render | `10000` |
 | Everything else | `config.py` defaults | Groq free-tier limits, the other per-client and per-IP limits |

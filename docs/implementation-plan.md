@@ -63,18 +63,20 @@ Limits for `openai/gpt-oss-120b`, matching the plan's free-tier figures:
 - **Signals Groq sends:** going over a limit returns `429 Too Many Requests` with a `retry-after` header (in seconds). Every response also carries `x-ratelimit-remaining-requests` and `x-ratelimit-reset-requests` (per day), and `x-ratelimit-remaining-tokens` and `x-ratelimit-reset-tokens` (per minute).
 - **Cached tokens don't count** toward the limits.
 
-**Rough budget.** These are estimates; replace them with measured numbers from the usage logs (task 3.4) before setting the limits in 6.4.
+**Budget (measured).** Token counts from the Render usage logs; the first estimate was ~2,500 per question (router ~1,000 + answer ~1,500).
 
-| Message kind | Groq calls | Tokens (approx.) |
+| Message kind | Groq calls | Tokens |
 |---|---|---|
 | Handled by rules: PII, advisory, NAV/performance, greeting | 0 | 0 |
-| Factual question through the LLM router and generator | 2 | ~2,500 (router ~1,000 + answer ~1,500) |
-| Same, with one validator retry (3.10) | 3 | ~4,000 |
+| Factual question through the LLM router and generator | 2 | **~1,950** measured (router ~910 + answer ~1,020) |
+| Same, with one validator retry (3.10) | 3 | ~3,000 (estimate: one more answer call) |
 
-**Tokens are the binding limit:**
-- 8K tokens per minute is about **3 model-answered messages per minute across all users**.
-- 200K tokens per day is about **80 per day**.
+**Tokens are the binding limit.** The app uses 80% of each limit (`GROWWBUDDY_GROQ_HEADROOM=0.8`):
+- 8K tokens per minute → 6,400 / ~1,950 ≈ **3 model-answered messages per minute across all users**.
+- 200K tokens per day → 160,000 / ~1,950 ≈ **80 per day**.
 - Requests allow much more: about 15 per minute and 500 per day.
+
+The per-user limits (`GROWWBUDDY_CLIENT_*`, `GROWWBUDDY_IP_*`) are for fairness, so one person can't use up the shared allowance; the Groq budget guard is the overall ceiling. On Render the per-client limit is 3 a minute, the whole budget (`render.yaml`).
 
 So the free tier supports a demo or a small pilot, not public traffic. Add this to Known Limitations (task 8.4).
 
