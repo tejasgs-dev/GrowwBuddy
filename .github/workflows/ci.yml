@@ -32,6 +32,8 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     strategy:
+      # Run both versions to the end: a failure on one must not hide the other's result.
+      fail-fast: false
       matrix:
         python-version: ["3.11", "3.12"]
     steps:
@@ -45,8 +47,11 @@ jobs:
 
       - name: Install
         # CPU-only torch keeps the install small (pulled in by sentence-transformers).
+        # setuptools: torch requires it, and the runner's Python 3.11 ships 79.0.1, which
+        # satisfies torch but has known advisories (PYSEC-2026-3447, GHSA-xmj3-9gf7-h52w),
+        # so pip-audit fails. Upgrade it to the fixed release first.
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip "setuptools>=84.1.0"
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install -e "backend[dev]"
 
