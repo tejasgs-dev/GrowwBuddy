@@ -4,7 +4,8 @@
 PYTHON ?= python
 BACKEND := backend
 
-.PHONY: install lint format test ingest serve eval eval-free eval-cutoff linkcheck audit pii-patterns \n	frontend-install frontend-dev frontend-test frontend-build
+.PHONY: install lint format test ingest serve eval eval-free eval-cutoff linkcheck audit \
+	pii-patterns pull-index bundle frontend-install frontend-dev frontend-test frontend-build
 
 install:
 	$(PYTHON) -m pip install -e "$(BACKEND)[dev]"
@@ -43,6 +44,19 @@ eval-cutoff:
 # The five Groww URLs still resolve and show the right scheme (task 6.8). Fetches 5 pages.
 linkcheck:
 	cd $(BACKEND) && $(PYTHON) -m growwbuddy.ingest.linkcheck
+
+# ---------------------------------------------------------------- daily refresh (Phase 7)
+# Pull the newest index-* release from GROWWBUDDY_INDEX_REPO into data/growwbuddy.db (the
+# server also does this by itself). Roll back with
+#   cd backend && python -m growwbuddy.refresh --tag index-YYYY-MM-DD   (pins that release)
+#   cd backend && python -m growwbuddy.refresh --unpin                  (back to the newest)
+pull-index:
+	cd $(BACKEND) && $(PYTHON) -m growwbuddy.refresh
+
+# Build a bundle locally the way the workflow does (fetches the 5 pages; no Groq needed).
+# Output in data/bundle-out/; the app database is untouched.
+bundle:
+	cd $(BACKEND) && $(PYTHON) -m growwbuddy.ingest --bundle ../data/bundle-out
 
 # Dependency audit (task 6.10, EV-6-13).
 audit:

@@ -139,6 +139,24 @@ class SchemeFactHistory(Base):
     changed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
 
+class BundleState(Base):
+    """Single row: which daily index bundle the app last imported (Phase 7, task 7.6).
+
+    `checked_at` is the bundle's latest heartbeat: when the daily job last confirmed the
+    pages are unchanged. `pinned_tag` is set by `python -m growwbuddy.refresh --tag`
+    (rollback); while it is set, the poller doesn't import other releases.
+    """
+
+    __tablename__ = "bundle_state"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, default=1)
+    tag: Mapped[str] = mapped_column(String(64))
+    bundle_sha256: Mapped[str] = mapped_column(String(64))
+    checked_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    imported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    pinned_tag: Mapped[str | None] = mapped_column(String(64))
+
+
 class Thread(Base):
     """One chat thread (architecture §9.1, task 4.1).
 

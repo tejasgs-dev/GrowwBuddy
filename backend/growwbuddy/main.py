@@ -9,6 +9,10 @@ this module has no side effects. Tests pass their own `Services` to `create_app`
 
 A background task deletes threads with no activity for `GROWWBUDDY_THREAD_RETENTION_DAYS`
 (task 6.7): once at startup, then every few hours.
+
+When `GROWWBUDDY_INDEX_REPO` is set, another task pulls the daily index bundle from that
+repository's `index-*` releases at startup and every `GROWWBUDDY_INDEX_POLL_MINUTES`
+(Phase 7, growwbuddy/refresh.py). Chats are never touched by it.
 """
 
 from __future__ import annotations
@@ -121,13 +125,19 @@ def create_app(
             if s.thread_retention_days > 0
             else None
         )
+        poller = None
+        if s.index_repo:
+            from growwbuddy.refresh import make_puller, poll_loop
+
+            poller = asyncio.create_task(poll_loop(make_puller(s), s.index_poll_minutes * 60.0))
         try:
             yield
         finally:
-            if sweeper is not None:
-                sweeper.cancel()
-                with contextlib.suppress(asyncio.CancelledError):
-                    await sweeper
+            for task in (sweeper, poller):
+                if task is not None:
+                    task.cancel()
+                    with contextlib.suppress(asyncio.CancelledError):
+                        await task
 
     app = FastAPI(title="GrowwBuddy", version="0.1.0", lifespan=lifespan)
     app.state.services = services

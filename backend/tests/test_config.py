@@ -48,7 +48,8 @@ def test_EV_0_03_defaults() -> None:
     assert not hasattr(s, "chroma_dir")
     assert s.history_turns == 6
     assert s.retrieval_min_score is None
-    assert s.stale_days == 45
+    assert s.stale_days == 3  # lowered from 45 for the daily refresh (task 7.7)
+    assert s.index_repo is None and s.index_poll_minutes == 60 and s.index_token is None
     assert s.frontend_origin == "http://localhost:5173"
     assert s.groq_api_key is None
     assert s.corpus_dir.name == "corpus"

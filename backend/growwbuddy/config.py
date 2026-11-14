@@ -75,7 +75,17 @@ class Settings(BaseSettings):
     retrieval_min_gap: float | None = None
 
     # --- Freshness ---
-    stale_days: int = Field(default=45, gt=0)
+    # Days since the last successful fetch (or daily-refresh heartbeat) before answers add
+    # "(source may be out of date)". 3 = two missed daily runs (task 7.7).
+    stale_days: int = Field(default=3, gt=0)
+
+    # --- Daily index bundles (Phase 7, task 7.6) ---
+    # GitHub repository ("owner/name") whose `index-*` releases the app pulls. None: no
+    # polling (local `make ingest` only).
+    index_repo: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+    index_poll_minutes: int = Field(default=60, ge=1)
+    # Read-only token, only needed when the repository is private.
+    index_token: SecretStr | None = None
 
     # --- Retention (task 6.7) ---
     # Threads with no activity for this many days are deleted; 0 keeps them forever.

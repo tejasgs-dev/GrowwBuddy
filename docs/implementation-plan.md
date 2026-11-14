@@ -105,7 +105,7 @@ This replaces the table in architecture §14.
 | `GROWWBUDDY_RETRIEVAL_MIN_SCORE` | unset (set from the Phase 6 eval) | Low-confidence cutoff: minimum top score |
 | `GROWWBUDDY_RETRIEVAL_MIN_GAP` | unset (set from the Phase 6 eval) | Low-confidence cutoff: minimum gap between the top and second scores (task 6.3). Added to `config.py` in Phase 6; both cutoffs are left unset (see "Phase 6 results"). |
 | `GROWWBUDDY_THREAD_RETENTION_DAYS` | `30` | Threads with no activity for this many days are deleted (task 6.7); `0` keeps them |
-| `GROWWBUDDY_STALE_DAYS` | `45` (`3` from Phase 7) | Source staleness threshold. Lowered once the daily refresh exists (task 7.7). |
+| `GROWWBUDDY_STALE_DAYS` | `3` (was `45` before Phase 7) | Source staleness threshold, in days since the source was last fetched or confirmed unchanged by the daily heartbeat (task 7.7). |
 | `GROWWBUDDY_FRONTEND_ORIGIN` | `http://localhost:5173` | Allowed CORS origin (task 4.9) |
 | `GROWWBUDDY_FRONTEND_DIST` | `<project>/frontend/dist` | Built web UI, served at `/` when its `index.html` exists (task 5.10) |
 | `GROWWBUDDY_CORPUS_DIR` | `<project>/corpus` | `sources.yaml` and `raw/` downloads |
@@ -662,6 +662,41 @@ flowchart LR
 - Staleness: `checked_at` older than `GROWWBUDDY_STALE_DAYS` adds the marker; a fresh heartbeat removes it.
 - `actionlint` passes on `refresh-data.yml`.
 
+### Phase 7 results (14 Nov 2026)
+
+Everything that can be built and checked offline is done. **The workflow has not run on GitHub yet**, so the exit-check items below are still open.
+
+| Task | What was built | Where |
+|---|---|---|
+| 7.1 | `python -m growwbuddy.ingest --bundle OUT_DIR [--previous PREV_DIR] [--force]` runs the full pipeline into a new `bundle.sqlite` holding only the five index tables (no `-wal`/`-shm` sidecars) and writes `manifest.json` with every field listed in 7.1 plus `headers_sha256`, `bundle_sha256` and `bundle_bytes`. Also writes `result.json` and `summary.md` for the job summary and issues; these are never release assets. `make bundle` runs it locally. | `ingest/bundle.py`, `ingest/__main__.py` |
+| 7.2 | `refresh-data.yml`: cron `30 4 * * *` plus `workflow_dispatch` (with a `force` input), `concurrency: refresh-data`, 20-minute timeout, Python 3.12, CPU-only torch, pip and Hugging Face caches, every action pinned to a commit SHA, `contents: write` and `issues: write` only. | `.github/workflows/refresh-data.yml` |
+| 7.3 | The new build starts from a copy of the previous bundle. If the content hashes, retrieval headers, embed model and schema are all unchanged, nothing is re-embedded and only a heartbeat manifest is uploaded over the latest release's `manifest.json`. | `ingest/bundle.py` |
+| 7.4 | Gates: sources, chunk count (±10% of the previous bundle, 60 the first time), core facts, embeddings (model, dimension, no NaN or zero vectors), retrieval smoke set 7/7 in the top 3, and the link check. Any failure publishes nothing. | `ingest/gates.py` |
+| 7.5 | One open "Daily data refresh failed" issue, commented on by later failures. A "Scheme facts to review" issue when facts change or an exit load is stored unverified. Both contain only gate results, scheme names and fact values. | `ingest/notify.py`, workflow |
+| 7.6 | `python -m growwbuddy.refresh` (`make pull-index`), `--tag` (roll back and pin), `--unpin`, `--from-dir`. Checks the sha256, schema version and embed model, then imports in one transaction under the ingest lock. Facts are merged with the local-ingest rule. The server polls at startup and every `GROWWBUDDY_INDEX_POLL_MINUTES` when `GROWWBUDDY_INDEX_REPO` is set. The `bundle_state` table records the imported tag, its heartbeat and any pin. | `refresh.py`, `main.py`, `store/models.py` |
+| 7.7 | `GROWWBUDDY_STALE_DAYS` default 3. A heartbeat moves `sources_state.fetched_at` forward for sources whose hash still matches, so the task 6.6 marker is measured from the latest heartbeat. | `config.py`, `refresh.py` |
+| 7.8 | The link check runs on the pages this run already fetched (5 Groww requests a day, not 10). A hard failure fails the gate; warnings go to the job summary. | `ingest/bundle.py` |
+| 7.9 | **No `GROQ_API_KEY` in GitHub** (decision). The bundle CLI passes no LLM when the key is unset. Exit-load wording the rules don't recognise is stored unverified, passes the core-facts gate as "needs review" (only for that reason), and is listed in the review issue. | `ingest/__main__.py`, `ingest/gates.py`, `ingest/extract_facts.py` |
+| 7.10 | CI job `workflows` runs actionlint **1.7.12** (release tarball, sha256 checked). 49 new tests, all offline: `test_bundle.py` (24), `test_refresh.py` (20), `test_workflows.py` (5). | `.github/workflows/ci.yml`, `backend/tests/` |
+| 7.11 | Not written yet; it goes in the README in Phase 8. The steps are in "First run" below. | |
+
+**Findings and decisions**
+
+- **Bugs fixed.** (1) `ingest/__main__.py` had a raw newline inside an f-string, so the ingest CLI didn't import at all. (2) The manifest's per-source `as_of_date` was read before the new chunks were written: it was missing on a first build and showed the previous day's date afterwards. (3) The Makefile's `.PHONY` line held a literal `\n` (from before Phase 7).
+- **Unverified exit loads don't block the refresh.** With no LLM, failing the gate on a new exit-load wording would stop all updates until the rules learn it. Instead the fact is stored unverified (so answers never use it from the facts table) and listed for review. Any other unverified core fact still fails the gate.
+- **actionlint.** Version 1.7.12 was looked up on GitHub's release page on 14 Nov 2026. It passes on both workflows locally, but without shellcheck, which CI's runner has. The first CI run is the first shellcheck pass.
+- **Releases are created with `--latest=false`,** so index releases don't take the repository's "Latest" badge. The poller and the workflow pick the newest `index-*` release by publish date instead.
+- **Test run (14 Nov 2026):** 755 passed, 8 skipped (the real-embedding-model tests); ruff and mypy clean. `test_config.py` was updated for the new `stale_days` default.
+
+**First run.** The repository must be on GitHub with this workflow on the default branch.
+1. Push the branch and merge it to the default branch. Scheduled runs and the "Run workflow" button only use the default branch's copy.
+2. Settings → Actions → General: allow actions, and set "Workflow permissions" to "Read and write" (or keep it read-only; the workflow asks for `contents`/`issues: write` itself, unless an organisation policy caps it).
+3. Actions → "Refresh data" → Run workflow → branch: the default branch → leave "force" unticked → Run. With no previous release, the first run builds a bundle anyway.
+4. Check the run's summary (gate table), then Releases (`index-YYYY-MM-DD` with `bundle.sqlite` and `manifest.json`) and Issues.
+5. On the server, set `GROWWBUDDY_INDEX_REPO=owner/name` (plus `GROWWBUDDY_INDEX_TOKEN` if the repository is private) and run `make pull-index`, or restart `make serve`.
+
+**To close Phase 7:** the exit-check items below, starting with three scheduled runs in a row.
+
 ### Exit check
 
 - [ ] The workflow runs on schedule at about 10:00 IST on three days in a row, and each run either publishes a bundle or a heartbeat
@@ -743,6 +778,6 @@ Where each requirement from the problem statement is built and checked.
 | Refusal links: the problem statement asks for an AMFI/SEBI educational link, but no extra URLs are allowed | Use the Groww scheme page (task 1.2), or allow one AMFI/SEBI link for refusals only, never indexed | Task 1.2 |
 | Thread retention period | 30 days, user-deletable | Task 6.7 |
 | Hosting target | Single container on a VM or PaaS | Task 8.6 |
-| Refresh time zone | 10:00 **IST** (cron `30 4 * * *`, UTC) | Task 7.2 |
-| How the app receives the daily index | GitHub Release asset, pulled and verified by the app (7.6). Alternatives: the workflow calls an authenticated endpoint on the server (push; needs an inbound admin route), or commits the bundle to the repository (makes git history grow every day). | Task 7.6 |
-| Changed facts from the daily run: live at once, or held until a person reviews them | Live at once if every automated check passes, with a review issue opened (7.5). An out-of-date fact is the bigger risk for a daily-refreshed source. The stricter option keeps the old value until review. | Task 7.6 |
+| Refresh time zone | **Decided (14 Nov 2026):** 10:00 **IST** (cron `30 4 * * *`, UTC) | Task 7.2 (closed) |
+| How the app receives the daily index | **Decided (14 Nov 2026):** GitHub Release asset, pulled and verified by the app (7.6). Rejected: the workflow calling an authenticated endpoint on the server (push; needs an inbound admin route), and committing the bundle to the repository (git history grows every day). | Task 7.6 (closed) |
+| Changed facts from the daily run: live at once, or held until a person reviews them | **Decided (14 Nov 2026):** live at once if every automated check passes, with a review issue opened (7.5); the changed fact's review is cleared. An out-of-date fact is the bigger risk for a daily-refreshed source. Rejected: keeping the old value until review. | Task 7.6 (closed) |

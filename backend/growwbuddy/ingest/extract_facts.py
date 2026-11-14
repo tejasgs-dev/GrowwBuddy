@@ -55,6 +55,11 @@ CORE_FACT_KEYS = (
     "riskometer",
 )
 
+# check_error of an exit load whose wording the rules don't recognise when no LLM is
+# configured (the daily refresh runs without GROQ_API_KEY). Stored unverified; the refresh
+# lists it for review instead of failing the core-facts gate (tasks 7.4, 7.9).
+NO_LLM_EXIT_LOAD = "wording not recognised by rules and no LLM configured"
+
 # Headline figure -> its check-only copy from the page's TER history (EC-FCT-10).
 _HISTORY_FIELD = {
     "expense_ratio_direct": ("expense_ratio_history", "TER"),
@@ -175,7 +180,7 @@ def extract_facts(page: ParsedPage, llm: StructuredLLM | None = None) -> list[Ex
             if value is None:
                 extracted_by = "llm"
                 if llm is None:
-                    error = "wording not recognised by rules and no LLM configured"
+                    error = NO_LLM_EXIT_LOAD
                 else:
                     value, error = asyncio.run(llm_exit_load(field.value, llm))
         elif spec.fact_key == "riskometer":
